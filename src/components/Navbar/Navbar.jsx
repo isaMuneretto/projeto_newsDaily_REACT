@@ -9,7 +9,7 @@ export function Navbar() {
                 <div className="input-search-space">
                     <i className="bi bi-search"> {/*tag de icone*/}
                     </i>
-                    <input type="text" />
+                    <input type="text" placeholder="Pesquise por um título " />
 
                 </div>
 
