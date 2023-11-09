@@ -5,7 +5,7 @@ está importando o App que é um componente e o CSS*/
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
-import './index.css'
+import './GlobalStyled.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render( //root vem la do index e embaixo renderiza o arquivo App.jsx
   <React.StrictMode> 
