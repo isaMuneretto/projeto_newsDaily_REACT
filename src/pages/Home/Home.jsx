@@ -2,16 +2,16 @@
 //Caminho: index chama a main, a main chama o App.jsx e o App.jsx chama o Home.jsx
 //aqui vai chamar os componentes (card, footer e navbar)
 
+import { useEffect, useState } from "react";
 import { Card } from "../../components/Card/Card.jsx";
 import { Navbar } from "../../components/Navbar/Navbar";
 /* import { news } from '../../Datas.js'  *///buscar o conteudo mocado (ficticio) no Datas
 import { getAllNews } from "../../services/newsServices.js";
 import { HomeBody } from "./HomeStyled.jsx";
-import { useState } from "react";
 
 export default function Home() {
 
-    const [news] = useState([]); //array desestruturado, variavel news inicializa con array vazio. setNews altera o estado de array vazio para array com alguma coisa
+    const [news, setNews] = useState([]); //array desestruturado, variavel news inicializa con array vazio. setNews altera o estado de array vazio para array com alguma coisa
 
     async function findAllNews() { //essa função utiliza o Service para trazer os posts
         const response = await getAllNews();
@@ -19,6 +19,11 @@ export default function Home() {
     }
 
     //findAllNews(); qnd renderizar,essa função vai chamar o axios e vai trazer os posts aqui só que está na raiz e vai criar um loop
+    //abaixo função de callback (o que vai acontecer qnd useEffect for acionado) e array de dependencias 
+    //é quem ele precisa monitorar para que o efeito seja dado na tela
+    useEffect(() => {
+        findAllNews();
+    }, [news])
 
     return ( //o return so pode retornar uma tag entao tem que envolver em uma section ou qlqr outra tag, div, etc no caso usei uma Fragment (tag sem nome) 
         <> {/*Fragment é uma tag vazia não precisa ter nome*/}

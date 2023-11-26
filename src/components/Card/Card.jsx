@@ -1,15 +1,16 @@
+import { TextLimit } from "../TextLimit/TextLimit"
 import { CardBody, CardContainer, CardFooter } from "./CardStyled"
 
-export function Card({ props }) {
+export function Card( props ) {
     console.log(props)
     return (
         <CardContainer>{/*tag section */}{/*como aqui é html e os dados dentro das tags são JS, tem que interpolar com chaves */}
             <CardBody> {/*tag article */}
                 <div>
                     <h2>{props.title}</h2>
-                    <p>{props.text}</p>
+                    <img src={props.banner} alt="Imagem" />
                 </div>
-                <img src={props.banner} alt="Imagem" />
+                <TextLimit text={props.text} limit={150} />
             </CardBody>
 
             <CardFooter>
