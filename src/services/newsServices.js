@@ -3,9 +3,14 @@
 
 import axios from "axios";
 
-const baseURL = "http://localhost/3000";
+const baseURL = "http://localhost:3000";
 
 export function getAllNews() {
     const response = axios.get(`${baseURL}/news`); //é assincrono aqui, sai da front e vai p/ o back pegar os dados
+    return response;
+}
+
+export function getTopNews() {
+    const response = axios.get(`${baseURL}/news/top`); //é assincrono aqui, sai da front e vai p/ o back pegar os dados
     return response;
 }

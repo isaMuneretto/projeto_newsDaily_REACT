@@ -13,9 +13,11 @@ export function Navbar() {
 
                 </InputSpace>
 
-                <ImageLogo src={logo} alt="Logo News Daily" />
+                <ImageLogo src={logo} alt="Logo " />
 
-                <Button>Entrar</Button> {/*ao inves de ser um componente HTML, agora é componente CSS*/}
+                <Button>Login</Button> {/*ao inves de ser um componente HTML, agora é componente CSS*/}
+
+                <Button>Registre-se</Button>
             </Nav>
         </>
     )
