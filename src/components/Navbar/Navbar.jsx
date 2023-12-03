@@ -1,3 +1,6 @@
+// A navbar vai chamar a Home e a Search
+
+import { Outlet } from "react-router-dom";
 import logo from "../../images/LogoND.png";
 import { Button, ImageLogo, InputSpace, Nav } from "./NavbarStyled";
 //import "./Navbar.css";
@@ -19,6 +22,7 @@ export function Navbar() {
 
                 <Button>Registre-se</Button>
             </Nav>
+            <Outlet/> {/*a outlet é uma rota que fica embaixo da navbar portanto ela não pode ser colocada em outro lugar*/}
         </>
     )
 }

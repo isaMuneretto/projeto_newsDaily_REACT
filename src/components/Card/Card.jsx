@@ -1,3 +1,5 @@
+//um componente sempre retorna um HTML
+
 import { TextLimit } from "../TextLimit/TextLimit"
 import { CardBody, CardContainer, CardFooter, CardHeader } from "./CardStyled"
 
