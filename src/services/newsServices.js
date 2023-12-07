@@ -14,3 +14,8 @@ export function getTopNews() {
     const response = axios.get(`${baseURL}/news/top`); //é assincrono aqui, sai da front e vai p/ o back pegar os dados
     return response;
 }
+
+export function searchNews(title) {
+    const response = axios.get(`${baseURL}/news/search?title=${title}`); //é assincrono aqui, sai da front e vai p/ o back pegar os dados
+    return response;
+}

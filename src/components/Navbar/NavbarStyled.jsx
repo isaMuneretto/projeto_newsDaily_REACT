@@ -58,8 +58,9 @@ export const InputSpace = styled.div`
     border: none;
     width: 100%;
     border-radius: 0.3rem;
+    transition: border-color 0.3s;
 
-    :focus {
+    &:focus {
       border: 1px solid #0bade3;
     }
   }
@@ -67,11 +68,11 @@ export const InputSpace = styled.div`
 
 export const Button = styled.button`
   //se quiser usar esse estilo em outro lugar é só exportar
-  background-color: #0bade3;
+  background-color: #b4aebb;
   border: none;
   outline: none;
   font-size: 1rem;
-  padding: 0.4rem 1rem;
+  padding: 0.4rem 2rem;
   color: #fff;
   transition: all 0.4s ease-in-out;
   cursor: pointer;
@@ -82,9 +83,20 @@ export const Button = styled.button`
   font-weight: 500;
   letter-spacing: 0.1rem;
   text-transform: uppercase;
+  transition: border-color 0.3s;
 
   :hover {
     //o hover é como uma herança
-    background-color: #0a86af;
+    background-color: #51af0a;
   }
 `;
+
+export const ErrorSpan = styled.span`
+  background-color: #ffaeae;
+  color: #9e0000;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  font-size: 1.1rem;
+  font-weight: bold;
+`

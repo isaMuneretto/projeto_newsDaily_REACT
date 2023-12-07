@@ -6,13 +6,24 @@
 
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import logo from "../../images/LogoND.png";
-import { Button, ImageLogo, InputSpace, Nav } from "./NavbarStyled";
+import { Button, ErrorSpan, ImageLogo, InputSpace, Nav } from "./NavbarStyled";
 import { useForm } from "react-hook-form";
-//import "./Navbar.css";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+
+const searchSchema = z.object({ //zod é uma biblioteca de validação baseada em schemas. É feita por campo e o errorSpan tambem 
+    title: z
+    .string()
+    .nonempty({ message: "A pesquisa não pode ser vazia" })
+    .refine(value => !/^\s*$/.test(value), { message: "A pesquisa não pode ter apenas espaços" }), //esse refine é um regex, os caracteres indicam espaço vazio, se negar não pode ter só espaço
+});
+//
 
 export function Navbar() {
-    const { register, handleSubmit, reset } = useForm(); //parametros desestruturados do HookForm(usado para formularios)
-
+    const { register, handleSubmit, reset, formState: { errors }, } = useForm({ //parametros desestruturados do HookForm(usado para formularios)
+        resolver: zodResolver(searchSchema), //zodResolver pode ser qualquer nome
+    });
     //se usa o useNavigate pq não vou criar um link no html do return, eu vou mudar de rota pelo javascript
     const navigate = useNavigate(); //reacte-router-dom
 
@@ -21,7 +32,11 @@ export function Navbar() {
         //navega na pagina search e vai pegar o title do parametro e vai mostrar
         navigate(`/search/${title}`);
         reset();
-    }
+    };
+
+    function goAuth() {
+        navigate("/auth"); //o navigate faz ir para a rota /auth (main)
+    };
 
     return (
         <>
@@ -43,10 +58,10 @@ export function Navbar() {
                     <ImageLogo src={logo} alt="Logo " />
                 </Link>
 
-                <Button>Login</Button> {/*ao inves de ser um componente HTML, agora é componente CSS*/}
+                <Button onClick={goAuth}>Login</Button> {/*goAuth é uma função inventada*/}
 
-                <Button>Registre-se</Button>
             </Nav>
+            {errors.title && <ErrorSpan>{errors.title.message}</ErrorSpan>} {/*se isso não for nulo, vai rodar e mostrar na tela title e message*/}
             <Outlet /> {/*a outlet é uma rota que fica embaixo da navbar portanto ela não pode ser colocada em outro lugar*/}
         </>
     )

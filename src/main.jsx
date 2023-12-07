@@ -10,6 +10,7 @@ import { Navbar } from './components/Navbar/Navbar.jsx';
 import { Search } from './pages/Search/Search.jsx';
 import { GlobalStyled } from './GlobalStyled.jsx';
 import ErrorPage from './pages/ErrorPage/ErrorPage.jsx';
+import { Authentication } from './pages/Authentication/Authentication.jsx';
 
 
 //a router vai chamar as rotas atraves de um array de objetos
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
         element: <Search />,
       }
     ]
+  },
+  {
+    path: "/auth", //o login eu não quero que apareça a navbar então eu saí da rota mae
+    element: <Authentication />,
   }
 ])
 
