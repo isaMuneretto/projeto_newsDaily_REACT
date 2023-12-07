@@ -6,17 +6,18 @@
 
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import logo from "../../images/LogoND.png";
-import { Button, ErrorSpan, ImageLogo, InputSpace, Nav } from "./NavbarStyled";
+import { ErrorSpan, ImageLogo, InputSpace, Nav } from "./NavbarStyled";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Button } from "../Button/Button";
 
 
 const searchSchema = z.object({ //zod é uma biblioteca de validação baseada em schemas. É feita por campo e o errorSpan tambem 
     title: z
-    .string()
-    .nonempty({ message: "A pesquisa não pode ser vazia" })
-    .refine(value => !/^\s*$/.test(value), { message: "A pesquisa não pode ter apenas espaços" }), //esse refine é um regex, os caracteres indicam espaço vazio, se negar não pode ter só espaço
+        .string()
+        .nonempty({ message: "A pesquisa não pode ser vazia" })
+        .refine(value => !/^\s*$/.test(value), { message: "A pesquisa não pode ter apenas espaços" }), //esse refine é um regex, os caracteres indicam espaço vazio, se negar não pode ter só espaço
 });
 //
 
@@ -58,7 +59,9 @@ export function Navbar() {
                     <ImageLogo src={logo} alt="Logo " />
                 </Link>
 
-                <Button onClick={goAuth}>Login</Button> {/*goAuth é uma função inventada*/}
+                <Link to="/auth">
+                    <Button type="button" text="Entrar">Entrar</Button> {/*goAuth é uma função inventada*/}
+                </Link>
 
             </Nav>
             {errors.title && <ErrorSpan>{errors.title.message}</ErrorSpan>} {/*se isso não for nulo, vai rodar e mostrar na tela title e message*/}
