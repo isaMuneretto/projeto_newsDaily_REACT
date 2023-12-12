@@ -6,28 +6,34 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { signinSchema } from "../../schemas/signinSchema";
 import { ErrorSpan } from "../../components/Navbar/NavbarStyled";
 import { signupSchema } from "../../schemas/signupSchema";
+import { signup } from "../../services/userServices";
 
 export function Authentication() {
-    const { 
+    const {
         register: registerSignup, //apelido para register 
-        handleSubmit: handleSubmitSignup, 
-        formState: { errors: errorsSignup }, 
-    } = useForm({ resolver: zodResolver(signupSchema)});
+        handleSubmit: handleSubmitSignup,
+        formState: { errors: errorsSignup },
+    } = useForm({ resolver: zodResolver(signupSchema) });
 
     //aqui temos duas estruturas de hook form pq temos dois forms nesse mesmo componente (signin e signup)
 
     const {
-        register: registerSignin, 
-        handleSubmit: handleSubmitSignin, 
-        formState: { errors: errorsSignin }, 
-    } = useForm({resolver: zodResolver(signinSchema)});
+        register: registerSignin,
+        handleSubmit: handleSubmitSignin,
+        formState: { errors: errorsSignin },
+    } = useForm({ resolver: zodResolver(signinSchema) });
 
     function inHandleSubmit(data) {
         console.log(data)
     };
 
-    function upHandleSubmit(data) {
-        console.log(data)
+    async function upHandleSubmit(data) {
+        try {
+            const response = await signup(data);
+            console.log(response);
+        } catch (error) {
+            console.log(error)
+        }
     };
 
     return (
@@ -35,9 +41,9 @@ export function Authentication() {
             <Section type="signin">
                 <h2>Entrar</h2>
                 <form onSubmit={handleSubmitSignin(inHandleSubmit)}>
-                    <Input type="email" placeholder="E-mail" name="email" register={registerSignin}/>
+                    <Input type="email" placeholder="E-mail" name="email" register={registerSignin} />
                     {errorsSignin.email && (<ErrorSpan>{errorsSignin.email.message}</ErrorSpan>)}
-                    <Input type="password" placeholder="Senha" name="password" register={registerSignin}/>
+                    <Input type="password" placeholder="Senha" name="password" register={registerSignin} />
                     {errorsSignin.password && (<ErrorSpan>{errorsSignin.password.message}</ErrorSpan>)}
                     <Button type="submit" text="Entrar" />
                 </form>
@@ -45,13 +51,16 @@ export function Authentication() {
             <Section type="signup">
                 <h2>Cadastrar</h2>
                 <form onSubmit={handleSubmitSignup(upHandleSubmit)}>
-                    <Input type="text" placeholder="Nome" name="name" register={registerSignup}/>
+                    <Input type="text" placeholder="Nome" name="name" register={registerSignup} />
                     {errorsSignup.name && (<ErrorSpan>{errorsSignup.name.message}</ErrorSpan>)}
-                    <Input type="email" placeholder="E-mail" name="email" register={registerSignup}/>
+
+                    <Input type="email" placeholder="E-mail" name="email" register={registerSignup} />
                     {errorsSignup.email && (<ErrorSpan>{errorsSignup.email.message}</ErrorSpan>)}
-                    <Input type="password" placeholder="Senha" name="password" register={registerSignup}/>
+
+                    <Input type="password" placeholder="Senha" name="password" register={registerSignup} />
                     {errorsSignup.password && (<ErrorSpan>{errorsSignup.password.message}</ErrorSpan>)}
-                    <Input type="password" placeholder="Confirmar senha" name="confirmPassword" register={registerSignup}/>
+
+                    <Input type="password" placeholder="Confirmar senha" name="confirmPassword" register={registerSignup} />
                     {errorsSignup.confirmPassword && (<ErrorSpan>{errorsSignup.confirmPassword.message}</ErrorSpan>)}
                     <Button type="submit" text="Cadastrar" />
                 </form>
