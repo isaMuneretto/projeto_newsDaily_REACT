@@ -8,18 +8,10 @@ import { Link, Outlet, useNavigate } from "react-router-dom";
 import logo from "../../images/LogoND.png";
 import { ErrorSpan, ImageLogo, InputSpace, Nav } from "./NavbarStyled";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "../Button/Button";
+import { searchSchema } from "../../schemas/searchSchema";
 
-
-const searchSchema = z.object({ //zod é uma biblioteca de validação baseada em schemas. É feita por campo e o errorSpan tambem 
-    title: z
-        .string()
-        .nonempty({ message: "A pesquisa não pode ser vazia" })
-        .refine(value => !/^\s*$/.test(value), { message: "A pesquisa não pode ter apenas espaços" }), //esse refine é um regex, os caracteres indicam espaço vazio, se negar não pode ter só espaço
-});
-//
 
 export function Navbar() {
     const { register, handleSubmit, reset, formState: { errors }, } = useForm({ //parametros desestruturados do HookForm(usado para formularios)
