@@ -8,6 +8,7 @@ import { Card } from "../../components/Card/Card.jsx";
 /* import { news } from '../../Datas.js'  *///buscar o conteudo mocado (ficticio) no Datas
 import { getAllNews, getTopNews } from "../../services/newsServices.js";
 import { HomeBody, HomeHeader } from "./HomeStyled.jsx";
+import Cookies from "js-cookie";
 
 export default function Home() {
     const [news, setNews] = useState([]); //array desestruturado, variavel news inicializa con array vazio. setNews altera o estado de array vazio para array com alguma coisa
@@ -26,6 +27,7 @@ export default function Home() {
     //é quem ele precisa monitorar para que o efeito seja dado na tela
     useEffect(() => {
         findAllNews();
+        console.log(Cookies.get("token"));
     }, []); // Remova news das dependências    
 
     return ( //o return so pode retornar uma tag entao tem que envolver em uma section ou qlqr outra tag, div, etc no caso usei uma Fragment (tag sem nome) 
